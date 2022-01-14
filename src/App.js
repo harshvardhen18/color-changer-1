@@ -1,25 +1,34 @@
-import logo from './logo.svg';
 import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import ColorChanger from "./components/ColorChanger/ColorChanger";
+import Dropdown from "./components/Dropdown/Dropdown";
+import React from "react";
+class App extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      color: ""
+    }
+  }
+  util= (param)=>this.setState({color:param});
+  //util= (param)=>console.log(param);
+  
+  render(){
+    return (
+      <div className="App"  onMouseUp={
+        (e)=>{
+          const block = document.getElementById("block");
+          if (!block.contains(e.target)) {
+            block.style.display = 'none';
+          }
+        }
+      }>
+        <Dropdown util={this.util}/>
+        {console.log(this.state.color)}
+        <ColorChanger bgc={this.state.color}/>
+      </div>
+    );
+  }
+  
 }
 
 export default App;
